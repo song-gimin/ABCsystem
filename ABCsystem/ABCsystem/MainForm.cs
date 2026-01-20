@@ -14,7 +14,7 @@ namespace ABCsystem
     {
         public MainForm()
         {
-            InitializeComponent();
+            InitializeComponent();//테스트
         }
     }
 }
