@@ -16,5 +16,10 @@ namespace ABCsystem
         {
             InitializeComponent();
         }
+
+        public void TestSong()
+        {
+           // 테스트용입니다.
+        }
     }
 }
