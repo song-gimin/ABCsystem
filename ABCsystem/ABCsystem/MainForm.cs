@@ -16,5 +16,6 @@ namespace ABCsystem
         {
             InitializeComponent();//테스트
         }
+
     }
 }
