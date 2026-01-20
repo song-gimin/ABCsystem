@@ -14,9 +14,8 @@ namespace ABCsystem
     {
         public MainForm()
         {
-            InitializeComponent();
-
-            public void statadlfja();
+            InitializeComponent();//테스트
         }
+
     }
 }
