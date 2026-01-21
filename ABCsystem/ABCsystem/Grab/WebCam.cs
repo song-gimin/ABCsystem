@@ -28,7 +28,7 @@ namespace ABCsystem.Grab
 
         internal override bool Grab(int bufferIndex, bool waitDone)
         {
-            if (_frame is null)
+            if (_frame == null)
             {
                 _frame = new Mat();
             }
@@ -54,7 +54,9 @@ namespace ABCsystem.Grab
                 {
                     BufferIndex++;
                     if (BufferIndex >= _userImageBuffer.Count())
+                    {
                         BufferIndex = 0;
+                    }
                 }
             }
 
@@ -96,7 +98,7 @@ namespace ABCsystem.Grab
 
             if (_capture == null) return false;
 
-            if (_frame is null)
+            if (_frame == null)
             {
                 _frame = new Mat();
                 _capture.Read(_frame); //프레임 캡처
@@ -172,7 +174,7 @@ namespace ABCsystem.Grab
 
         internal override bool SetTriggerMode(bool hardwareTrigger)
         {
-            if (_capture is null) return false;
+            if (_capture == null) return false;
 
             HardwareTrigger = hardwareTrigger;
 
@@ -193,7 +195,9 @@ namespace ABCsystem.Grab
             if (disposing)
             {
                 if (_capture != null)
+                {
                     _capture.Release();
+                }
             }
 
             _disposed = true;

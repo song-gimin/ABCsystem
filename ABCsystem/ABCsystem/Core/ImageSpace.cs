@@ -124,7 +124,7 @@ namespace ABCsystem.Core
                 Dispose(true);
                 GC.SuppressFinalize(this);
             }
-            #endregion Disposable
+            #endregion
         }
 
         public class ImagePtr

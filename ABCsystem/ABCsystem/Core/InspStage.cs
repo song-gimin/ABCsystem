@@ -118,8 +118,8 @@ namespace ABCsystem.Core
             //이 함수는 await를 사용하여 비동기적으로 실행되어, 함수를 async로 선언해야 합니다.
             if (LiveMode)
             {
-                await Task.Delay(100);  // 비동기 대기
-                _grabManager.Grab(bufferIndex, true);  // 다음 촬영 시작
+                await Task.Delay(100);  //비동기 대기
+                _grabManager.Grab(bufferIndex, true);  //다음 촬영 시작
             }
         }
 
@@ -155,14 +155,13 @@ namespace ABCsystem.Core
 
         public Bitmap GetBitmap(int bufferIndex = -1)
         {
-            if (Global.Inst.InspStage.ImageSpace is null)
-                return null;
+            if (Global.Inst.InspStage.ImageSpace == null) return null;
 
             return Global.Inst.InspStage.ImageSpace.GetBitmap();
         }
 
         #region Disposable
-        private bool disposed = false;
+        private bool disposed = false; //to detect redundant calls
 
         protected virtual void Dispose(bool disposing)
         {
@@ -170,6 +169,7 @@ namespace ABCsystem.Core
             {
                 if (disposing)
                 {
+                    //Dispose managed resources.
                     if (_grabManager != null)
                     {
                         _grabManager.Dispose();
@@ -177,6 +177,7 @@ namespace ABCsystem.Core
                     }
                 }
 
+                //Dispose unmanaged managed resources.
                 disposed = true;
             }
         }
@@ -185,6 +186,6 @@ namespace ABCsystem.Core
         {
             Dispose(true);
         }
-        #endregion Disposable
+        #endregion
     }
 }

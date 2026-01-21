@@ -51,12 +51,10 @@ namespace ABCsystem.UIControl
 
         private void ResizeCanvas()
         {
-            if (Width <= 0 || Height <= 0 || _bitmapImage == null)
-                return;
+            if (Width <= 0 || Height <= 0 || _bitmapImage == null) return;
 
             Canvas = new Bitmap(Width, Height);
-            if (Canvas == null)
-                return;
+            if (Canvas == null) return;
 
             float virtualWidth = _bitmapImage.Width * _curZoom;
             float virtualHeight = _bitmapImage.Height * _curZoom;
@@ -95,7 +93,7 @@ namespace ABCsystem.UIControl
 
         private void FitImageToScreen()
         {
-            if (_bitmapImage is null) return;
+            if (_bitmapImage == null) return;
 
             RecalcZoomRatio();
 

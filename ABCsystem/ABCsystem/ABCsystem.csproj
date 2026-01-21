@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MvCameraControl.Net">
+      <HintPath>..\..\..\ExternalLib\Dll\HikRobot\MvCameraControl.Net.dll</HintPath>
+    </Reference>
     <Reference Include="OpenCvSharp">
       <HintPath>..\..\ExternalLib\ExternalLib\Dll\OpenCv\OpenCvSharp.dll</HintPath>
     </Reference>
@@ -67,6 +70,12 @@
     <Compile Include="CameraForm.Designer.cs">
       <DependentUpon>CameraForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\Global.cs" />
+    <Compile Include="Core\ImageSpace.cs" />
+    <Compile Include="Core\InspStage.cs" />
+    <Compile Include="Grab\GrabModel.cs" />
+    <Compile Include="Grab\HikRobotCam.cs" />
+    <Compile Include="Grab\WebCam.cs" />
     <Compile Include="LogForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +114,7 @@
     <Compile Include="UIControl\ImageViewCtrl.Designer.cs">
       <DependentUpon>ImageViewCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Util\BitmapExtension.cs" />
     <EmbeddedResource Include="CameraForm.resx">
       <DependentUpon>CameraForm.cs</DependentUpon>
     </EmbeddedResource>
