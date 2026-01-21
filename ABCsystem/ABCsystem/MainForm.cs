@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ABCsystem.Core;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -35,6 +36,9 @@ namespace ABCsystem
             _dockPanel.Theme = new VS2015BlueTheme();
 
             LoadDockingWindows();
+
+            //#6_INSP_STAGE#1 전역 인스턴스 초기화
+            Global.Inst.Initialize();
         }
 
         private void LoadDockingWindows()

@@ -22,7 +22,7 @@ namespace ABCsystem.UIControl
         private RectangleF ImageRect = new RectangleF(0, 0, 0, 0);
 
         private float _curZoom = 1.0f;
-        
+
         private float _zoomFactor = 1.1f;
 
         private float MinZoom = 1.0f;
@@ -42,6 +42,11 @@ namespace ABCsystem.UIControl
             ResizeCanvas();
 
             DoubleBuffered = true;
+        }
+
+        public Bitmap GetCurBitmap()
+        {
+            return _bitmapImage;
         }
 
         private void ResizeCanvas()
