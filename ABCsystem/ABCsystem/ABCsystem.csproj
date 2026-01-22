@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\JidamVision4\ExternalLib\Dll\Log4Net\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="OpenCvSharp">
       <HintPath>..\..\ExternalLib\ExternalLib\Dll\OpenCv\OpenCvSharp.dll</HintPath>
     </Reference>
@@ -102,8 +105,12 @@
     <Compile Include="UIControl\ImageViewCtrl.Designer.cs">
       <DependentUpon>ImageViewCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utill\SLogger.cs" />
     <EmbeddedResource Include="CameraForm.resx">
       <DependentUpon>CameraForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogForm.resx">
+      <DependentUpon>LogForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

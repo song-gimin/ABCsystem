@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ABCsystem.Util;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace ABCsystem
@@ -19,12 +20,14 @@ namespace ABCsystem
             InitializeComponent();
         }
 
-        public void LoadImage(string filePath)
+        public void LoadImage(string filePath)  //이미지 불러오기
         {
             if (File.Exists(filePath) == false) return;
 
             Image bitmap = Image.FromFile(filePath);
             imageViewer.LoadBitmap((Bitmap)bitmap);
+
+            SLogger.Write($"이미지를 불러옴 {filePath}");
         }
     }
 }
