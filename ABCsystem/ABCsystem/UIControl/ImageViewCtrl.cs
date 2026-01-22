@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using ABCsystem.Algorithm;
 using ABCsystem.Core;
 using ABCsystem.Teach;
+using ABCsystem.Util;
 
 namespace ABCsystem.UIControl
 {
@@ -545,8 +546,9 @@ namespace ABCsystem.UIControl
             //ROI 크기 변경 또는 이동 완료            
             if (e.Button == MouseButtons.Left)
             {
-                if (_isSelectingRoi)
+                if (_isSelectingRoi)    //신규 ROI 추가 완료
                 {
+                    
                     _isSelectingRoi = false;
 
                     if (_bitmapImage is null)
@@ -569,9 +571,8 @@ namespace ABCsystem.UIControl
                     //모델에 InspWindow 추가하는 이벤트 발생
                     DiagramEntityEvent?.Invoke(this, new DiagramEntityEventArgs(EntityActionType.Add, null, _newRoiType, _roiRect, new Point()));
 
-
                 }
-                else if (_isResizingRoi)
+                else if (_isResizingRoi)    //기존 ROI 크기 변경 완료
                 {
                     _selEntity.EntityROI = _roiRect;
                     _isResizingRoi = false;

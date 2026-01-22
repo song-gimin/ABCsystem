@@ -1,4 +1,5 @@
-﻿using MvCamCtrl.NET;
+﻿using ABCsystem.Util;
+using MvCamCtrl.NET;
 using MvCameraControl;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ABCsystem.Grab
 {
@@ -203,7 +205,8 @@ namespace ABCsystem.Grab
                     if (MvError.MV_OK != ret)
                     {
                         _device.Dispose();
-                        Console.WriteLine("Device open fail!", ret);
+                        SLogger.Write($"Device open fail! [{ret:x8}]", SLogger.LogType.Error);
+                        MessageBox.Show($"Device open fail! {ret:X8}");
                         return false;
                     }
 
@@ -216,16 +219,16 @@ namespace ABCsystem.Grab
                             ret = _device.Parameters.SetIntValue("GevSCPSPacketSize", packetSize);
                             if (ret != MvError.MV_OK)
                             {
-                                Console.WriteLine("Warning: Set Packet Size failed {0:x8}", ret);
+                                SLogger.Write($"Warning: Set Packet Size failed {ret:x8}", SLogger.LogType.Error);
                             }
                             else
                             {
-                                Console.WriteLine("Set PacketSize to {0}", packetSize);
+                                SLogger.Write($"Set PacketSize to {packetSize}");
                             }
                         }
                         else
                         {
-                            Console.WriteLine("Warning: Get Packet Size failed {0:x8}", ret);
+                            SLogger.Write($"Warning: Get Packet Size failed {ret:x8}", SLogger.LogType.Error);
                         }
                     }
 
@@ -233,7 +236,7 @@ namespace ABCsystem.Grab
                     ret = _device.Parameters.SetEnumValue("TriggerMode", 1);
                     if (ret != MvError.MV_OK)
                     {
-                        Console.WriteLine("Set TriggerMode failed:{0:x8}", ret);
+                        SLogger.Write($"Set TriggerMode failed:{ret:x8}", SLogger.LogType.Error);
                         return false;
                     }
 
@@ -253,14 +256,14 @@ namespace ABCsystem.Grab
                     ret = _device.StreamGrabber.StartGrabbing();
                     if (ret != MvError.MV_OK)
                     {
-                        Console.WriteLine("Start grabbing failed:{0:x8}", ret);
+                        SLogger.Write("$Start grabbing failed:{ret:x8}", SLogger.LogType.Error);
                         return false;
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                SLogger.Write(ex.ToString(), SLogger.LogType.Error);
                 return false;
             }
 
@@ -271,7 +274,7 @@ namespace ABCsystem.Grab
         {
             if (_device == null)
             {
-                Console.WriteLine("_camera is null");
+                SLogger.Write("_device is null", SLogger.LogType.Error);
                 return false;
             }
 
@@ -288,7 +291,7 @@ namespace ABCsystem.Grab
             int result = _device.Parameters.GetEnumValue("PixelFormat", out enumValue);
             if (result != MvError.MV_OK)
             {
-                Console.WriteLine("Get PixelFormat failed: nRet {0:x8}", result);
+                SLogger.Write($"Get PixelFormat failed:{result:x8}", SLogger.LogType.Error);
                 return false;
             }
 

@@ -13,6 +13,7 @@ using ABCsystem.Core;
 using ABCsystem.Algorithm;
 using ABCsystem.Teach;
 using ABCsystem.UIControl;
+using ABCsystem.Util;
 
 namespace ABCsystem
 {
@@ -26,6 +27,7 @@ namespace ABCsystem
 
         private void ImageViewer_DiagramEntityEvent(object sender, DiagramEntityEventArgs e)
         {
+            SLogger.Write($"ImageViewer Action {e.ActionType.ToString()}");
             switch (e.ActionType)
             {
                 case EntityActionType.Select:

@@ -51,9 +51,6 @@ namespace ABCsystem
             var runForm = new RunForm();
             runForm.Show(cameraForm.Pane, DockAlignment.Bottom, 0.3);
 
-            var resusltForm = new ResultForm();
-            resusltForm.Show(runForm.Pane, DockAlignment.Right, 0.5);
-
             var propForm = new PropertiesForm();
             propForm.Show(_dockPanel, DockState.DockRight);
 
@@ -61,7 +58,7 @@ namespace ABCsystem
             logForm.Show(propForm.Pane, DockAlignment.Bottom, 0.5);
 
             var modelTreeWindow = new ModelTreeForm();
-            modelTreeWindow.Show(runForm.Pane, DockAlignment.Right, 0.3);
+            modelTreeWindow.Show(runForm.Pane, DockAlignment.Right, 0.5);
         }
 
         public static T GetDockForm<T>() where T : DockContent

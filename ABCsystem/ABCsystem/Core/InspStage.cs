@@ -1,6 +1,7 @@
 ﻿using ABCsystem.Algorithm;
 using ABCsystem.Grab;
 using ABCsystem.Teach;
+using ABCsystem.Util;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
 using System;
@@ -44,6 +45,7 @@ namespace ABCsystem.Core
 
         public bool Initialize()
         {
+            SLogger.Write("InspStage 초기화!");
             _imageSpace = new ImageSpace();
 
             _model = new Model();
@@ -261,7 +263,7 @@ namespace ABCsystem.Core
         private async void _multiGrab_TransferCompleted(object sender, object e)
         {
             int bufferIndex = (int)e;
-            Console.WriteLine($"_multiGrab_TransferCompleted {bufferIndex}");
+            SLogger.Write($"TransferCompleted {bufferIndex}");
 
             _imageSpace.Split(bufferIndex);
 
@@ -271,6 +273,7 @@ namespace ABCsystem.Core
             //이 함수는 await를 사용하여 비동기적으로 실행되어, 함수를 async로 선언해야 합니다.
             if (LiveMode)
             {
+                SLogger.Write("Grab");
                 await Task.Delay(100);  // 비동기 대기
                 _grabManager.Grab(bufferIndex, true);  // 다음 촬영 시작
             }
