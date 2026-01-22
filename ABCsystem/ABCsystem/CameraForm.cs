@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using ABCsystem.Core;
+using ABCsystem.Algorithm;
+using ABCsystem.Teach;
+using ABCsystem.UIControl;
+using ABCsystem.Util;
 
 namespace ABCsystem
 {
@@ -18,17 +22,50 @@ namespace ABCsystem
         public CameraForm()
         {
             InitializeComponent();
+            imageViewer.DiagramEntityEvent += ImageViewer_DiagramEntityEvent;
         }
 
-        public void LoadImage(string filePath)
+        private void ImageViewer_DiagramEntityEvent(object sender, DiagramEntityEventArgs e)    
+        {
+            SLogger.Write($"ImageViewer Action {e.ActionType.ToString()}");
+            switch (e.ActionType)
+            {
+                case EntityActionType.Select:
+                    Global.Inst.InspStage.SelectInspWindow(e.InspWindow);
+                    imageViewer.Focus();
+                    break;
+                case EntityActionType.Inspect:
+                    UpdateDiagramEntity();
+                    Global.Inst.InspStage.TryInspection(e.InspWindow);
+                    break;
+                case EntityActionType.Add:
+                    Global.Inst.InspStage.AddInspWindow(e.WindowType, e.Rect);
+                    break;
+                case EntityActionType.Move:
+                    Global.Inst.InspStage.MoveInspWindow(e.InspWindow, e.OffsetMove);
+                    break;
+                case EntityActionType.Resize:
+                    Global.Inst.InspStage.ModifyInspWindow(e.InspWindow, e.Rect);
+                    break;
+                case EntityActionType.Delete:
+                    Global.Inst.InspStage.DelInspWindow(e.InspWindow);
+                    break;
+                case EntityActionType.DeleteList:
+                    Global.Inst.InspStage.DelInspWindow(e.InspWindowList);
+                    break;
+            }
+        }
+
+        public void LoadImage(string filePath)  //이미지 파일 로드
         {
             if (File.Exists(filePath) == false) return;
 
             Image bitmap = Image.FromFile(filePath);
             imageViewer.LoadBitmap((Bitmap)bitmap);
+            SLogger.Write($"Load Image : {filePath}");
         }
 
-        private void CameraForm_Resize(object sender, EventArgs e)
+        private void CameraForm_Resize(object sender, EventArgs e)  //폼 리사이즈 이벤트
         {
             int margin = 0;
             imageViewer.Width = this.Width - margin * 2;
@@ -37,7 +74,7 @@ namespace ABCsystem
             imageViewer.Location = new System.Drawing.Point(margin, margin);
         }
 
-        public void UpdateDisplay(Bitmap bitmap = null)
+        public void UpdateDisplay(Bitmap bitmap = null) //이미지 뷰어 갱신
         {
             if (bitmap == null)
             {
@@ -52,16 +89,46 @@ namespace ABCsystem
             }
         }
 
-        public Bitmap GetDisplayImage()
+        //#10_INSPWINDOW#23 모델 정보를 이용해, ROI 갱신
+        public void UpdateDiagramEntity()
         {
-            Bitmap curImage = null;
+            imageViewer.ResetEntity();
 
-            if (imageViewer != null)
+            Model model = Global.Inst.InspStage.CurModel;
+            List<DiagramEntity> diagramEntityList = new List<DiagramEntity>();
+
+            foreach (InspWindow window in model.InspWindowList)
             {
-                curImage = imageViewer.GetCurBitmap();
+                if (window is null)
+                    continue;
+
+                DiagramEntity entity = new DiagramEntity()
+                {
+                    LinkedWindow = window,
+                    EntityROI = new Rectangle(
+                        window.WindowArea.X, window.WindowArea.Y,
+                            window.WindowArea.Width, window.WindowArea.Height),
+                    EntityColor = imageViewer.GetWindowColor(window.InspWindowType),
+                    IsHold = window.IsTeach
+                };
+                diagramEntityList.Add(entity);
             }
 
-            return curImage;
+            imageViewer.SetDiagramEntityList(diagramEntityList);
+        }
+        public void SelectDiagramEntity(InspWindow window)  //ROI 선택
+        {
+            imageViewer.SelectDiagramEntity(window);
+        }
+
+        public void AddRect(List<DrawInspectInfo> rectInfos)    //검사 결과 영역 추가
+        {
+            imageViewer.AddRect(rectInfos);
+        }
+
+        public void AddRoi(InspWindowType inspWindowType)   //ImageViewCtrl에서 ROI 생성
+        {
+            imageViewer.NewRoi(inspWindowType);
         }
     }
 }

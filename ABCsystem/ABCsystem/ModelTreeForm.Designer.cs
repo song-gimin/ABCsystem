@@ -1,6 +1,6 @@
 ﻿namespace ABCsystem
 {
-    partial class LogForm
+    partial class ModelTreeForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,34 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBoxLogs = new System.Windows.Forms.ListBox();
+            this.tvModelTree = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
             // 
-            // listBoxLogs
+            // tvModelTree
             // 
-            this.listBoxLogs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxLogs.FormattingEnabled = true;
-            this.listBoxLogs.ItemHeight = 18;
-            this.listBoxLogs.Location = new System.Drawing.Point(0, 0);
-            this.listBoxLogs.Margin = new System.Windows.Forms.Padding(4);
-            this.listBoxLogs.Name = "listBoxLogs";
-            this.listBoxLogs.Size = new System.Drawing.Size(800, 450);
-            this.listBoxLogs.TabIndex = 2;
+            this.tvModelTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvModelTree.Location = new System.Drawing.Point(0, 0);
+            this.tvModelTree.Name = "tvModelTree";
+            this.tvModelTree.Size = new System.Drawing.Size(390, 249);
+            this.tvModelTree.TabIndex = 1;
+            this.tvModelTree.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvModelTree_MouseDown);
             // 
-            // LogForm
+            // ModelTreeForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.listBoxLogs);
-            this.Name = "LogForm";
-            this.Text = "LogForm";
+            this.ClientSize = new System.Drawing.Size(390, 249);
+            this.Controls.Add(this.tvModelTree);
+            this.Name = "ModelTreeForm";
+            this.Text = "티칭창";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBoxLogs;
+        private System.Windows.Forms.TreeView tvModelTree;
     }
 }

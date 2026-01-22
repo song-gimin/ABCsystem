@@ -26,28 +26,28 @@ namespace ABCsystem.Core
     {
         private class ImageInfo : IDisposable
         {
-            private Bitmap _bitmap;
-            private Bitmap _tempBitmap;
+            private Bitmap _bitmap; //원본 Bitmap 객체
+            private Bitmap _tempBitmap; //임시 Bitmap 객체
 
-            private PixelFormat Format { get; set; }
+            private PixelFormat Format { get; set; }    //Bitmap 픽셀 포맷
 
-            public byte[] ImageData { get; set; }
+            public byte[] ImageData { get; set; }   //이미지 데이터 바이트 배열
 
-            public int PixelBpp { get; set; }
+            public int PixelBpp { get; set; }   //픽셀 당 비트 수
 
-            public int Width { get; set; }
+            public int Width { get; set; }  //이미지 너비
 
-            public int Height { get; set; }
+            public int Height { get; set; } //이미지 높이
 
-            public SizeF PixelResolution { get; set; }
+            public SizeF PixelResolution { get; set; }  //픽셀 해상도
 
-            public IntPtr Buffer { get; set; }
+            public IntPtr Buffer { get; set; }  //이미지 버퍼 포인터
 
-            public GCHandle Handle { get; set; }
+            public GCHandle Handle { get; set; }    //이미지 버퍼 핸들
 
-            public int Stride { get; set; }
+            public int Stride { get; set; } //이미지 스트라이드
 
-            public Bitmap ToBitmap()
+            public Bitmap ToBitmap()    //Byte 배열을 Bitmap으로 변환
             {
                 if (_bitmap == null)
                 {
@@ -90,7 +90,7 @@ namespace ABCsystem.Core
                 return _tempBitmap;
             }
 
-            public Mat ToMat()
+            public Mat ToMat()  //Byte 배열을 Mat으로 변환
             {
                 MatType matType = PixelBpp == 8 ? MatType.CV_8UC1 : MatType.CV_8UC3;
                 Mat mat = Mat.FromPixelData(Height, Width, matType, ImageData);
@@ -127,7 +127,7 @@ namespace ABCsystem.Core
             #endregion
         }
 
-        public class ImagePtr
+        public class ImagePtr //이미지 포인터 정보를 담는 클래스
         {
             public IntPtr Ptr { get; set; }
             public long Length { get; set; }
@@ -294,7 +294,7 @@ namespace ABCsystem.Core
         }
         #endregion Property
 
-        public Dictionary<int, Dictionary<eImageChannel, ImagePtr>> GetImageByChannelToClone()
+        public Dictionary<int, Dictionary<eImageChannel, ImagePtr>> GetImageByChannelToClone()  
         {
             if (_inspectionImage.PixelBpp == 8)
             {
@@ -338,28 +338,28 @@ namespace ABCsystem.Core
             }
         }
 
-        public byte[] GetInspectionBuffer(int index = 0)
+        public byte[] GetInspectionBuffer(int index = 0)    //이미지 버퍼 바이트 배열 반환
         {
             if (_imageInfo.Count <= index) return null;
 
             return _imageInfo[index].ImageData;
         }
 
-        public IntPtr GetnspectionBufferPtr(int index = 0)
+        public IntPtr GetInspectionBufferPtr(int index = 0)  //이미지 버퍼 포인터 반환
         {
             if (_imageInfo.Count <= index) return IntPtr.Zero;
 
             return _imageInfo[index].Buffer;
         }
 
-        public GCHandle GetInspectionBufferHandle(int index = 0)
+        public GCHandle GetInspectionBufferHandle(int index = 0)    //이미지 버퍼 핸들 반환
         {
             if (_imageInfo.Count <= index) return new GCHandle();
 
             return _imageInfo[index].Handle;
         }
 
-        public Bitmap GetBitmap(int index = 0, eImageChannel channel = eImageChannel.Color)
+        public Bitmap GetBitmap(int index = 0, eImageChannel channel = eImageChannel.Color) //이미지 Bitmap 반환
         {
             if (index < 0 || _imageInfo.Count <= index) return null;
 
@@ -373,7 +373,7 @@ namespace ABCsystem.Core
             }
         }
 
-        public Mat GetMat(int index = 0, eImageChannel channel = eImageChannel.Gray)
+        public Mat GetMat(int index = 0, eImageChannel channel = eImageChannel.Gray)    //이미지 Mat 반환
         {
             if (_imageInfo.Count <= index) return null;
 
@@ -390,7 +390,7 @@ namespace ABCsystem.Core
             return null;
         }
 
-        public Dictionary<int, Bitmap> GetBitmaps()
+        public Dictionary<int, Bitmap> GetBitmaps() //이미지 Bitmap 딕셔너리 반환
         {
             Dictionary<int, Bitmap> listBitmap = new Dictionary<int, Bitmap>();
             if (PixelBpp == 8)
@@ -413,7 +413,7 @@ namespace ABCsystem.Core
             return listBitmap;
         }
 
-        public void Split(int index)
+        public void Split(int index)    //이미지 채널 분리
         {
             if (!UseImageSplit) return;
 

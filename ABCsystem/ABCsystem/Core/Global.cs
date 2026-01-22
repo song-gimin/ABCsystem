@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ABCsystem.Core
 {
     //싱글톤을 이용하여, 전역적으로 쉽게 접근하는 클래스
-    public class Global : IDisposable
+    public class Global : IDisposable   
     {
         #region Singleton Instance
         private static readonly Lazy<Global> _instance = new Lazy<Global>(() => new Global());
@@ -21,9 +21,9 @@ namespace ABCsystem.Core
         }
         #endregion
 
-        private InspStage _stage = new InspStage();
+        private InspStage _stage = new InspStage(); 
 
-        public InspStage InspStage
+        public InspStage InspStage  
         {
             get { return _stage; }
         }
@@ -38,7 +38,7 @@ namespace ABCsystem.Core
             _stage.Initialize();
         }
 
-        public void Dispose()
+        public void Dispose()   
         {
             _stage.Dispose();
         }
