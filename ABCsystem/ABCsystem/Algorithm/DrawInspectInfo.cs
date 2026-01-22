@@ -13,4 +13,4 @@ namespace ABCsystem.Algorithm
         public Rect rect;
         public DecisionType decision; // 검사 결과 타입
     }
-}
+} 
