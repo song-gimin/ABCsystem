@@ -1,6 +1,6 @@
 ﻿namespace ABCsystem
 {
-    partial class LogForm
+    partial class ResultForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "LogForm";
+            this.Text = "ResultForm";
         }
 
         #endregion

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ABCsystem.Util
 {
-    public static class BitmapExtension //Bitmap 확장 메서드 모음
+    public static class BitmapExtension
     {
         public static Tuple<IntPtr, int> ToBufferAndStride(this Bitmap bitmap)
         {
@@ -31,7 +31,7 @@ namespace ABCsystem.Util
                 }
             }
         }
-        public static void Split(this Bitmap bitmap, byte[] r, byte[] g, byte[] b, byte[] gray) //Bitmap을 R,G,B,Gray 채널로 분리
+        public static void Split(this Bitmap bitmap, byte[] r, byte[] g, byte[] b, byte[] gray)
         {
             lock (bitmap)
             {

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ABCsystem.Util;
 
 namespace ABCsystem
 {
@@ -16,9 +14,6 @@ namespace ABCsystem
         [STAThread]
         static void Main()
         {
-            log4net.Config.XmlConfigurator.Configure(new FileInfo("log4net.config")); // log4net 설정 파일 로드
-            SLogger.Write("Logger initialized!", SLogger.LogType.Info);
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());

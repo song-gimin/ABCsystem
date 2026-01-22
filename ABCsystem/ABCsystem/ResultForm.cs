@@ -11,9 +11,9 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace ABCsystem
 {
-    public partial class PropertiesForm : DockContent
+    public partial class ResultForm : DockContent
     {
-        public PropertiesForm()
+        public ResultForm()
         {
             InitializeComponent();
         }
