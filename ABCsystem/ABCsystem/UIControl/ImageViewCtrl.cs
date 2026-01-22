@@ -15,7 +15,7 @@ using ABCsystem.Util;
 
 namespace ABCsystem.UIControl
 {
-    public enum EntityActionType
+    public enum EntityActionType    //ROI 추가,수정,삭제 등 액션 타입
     {
         None = 0,
         Select,
@@ -95,7 +95,7 @@ namespace ABCsystem.UIControl
         //팝업 메뉴
         private ContextMenuStrip _contextMenu;
 
-        public ImageViewCtrl()
+        public ImageViewCtrl()  
         {
             InitializeComponent();
             InitializeCanvas();
@@ -601,7 +601,6 @@ namespace ABCsystem.UIControl
                         else
                             //모델에 InspWindow 선택 변경 이벤트 발생
                             DiagramEntityEvent?.Invoke(this, new DiagramEntityEventArgs(EntityActionType.Select, _selEntity.LinkedWindow));
-
                     }
                 }
                 // ROI 선택 완료

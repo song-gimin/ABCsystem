@@ -55,7 +55,7 @@ namespace ABCsystem.Teach
             return inspWindow;
         }
 
-        private bool AddInspAlgorithm(InspWindow inspWindow)
+        private bool AddInspAlgorithm(InspWindow inspWindow)    //알고리즘 추가 메서드
         {
             switch (inspWindow.InspWindowType)
             {

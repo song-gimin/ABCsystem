@@ -45,7 +45,7 @@ namespace ABCsystem.Core
 
         public bool Initialize()
         {
-            SLogger.Write("InspStage 초기화!");
+            SLogger.Write("InspStage 초기화");
             _imageSpace = new ImageSpace();
 
             _model = new Model();
@@ -75,7 +75,7 @@ namespace ABCsystem.Core
             return true;
         }
 
-        public void InitModelGrab(int bufferCount)
+        public void InitModelGrab(int bufferCount)  //카메라 해상도에 맞게 이미지 버퍼 초기화
         {
             if (_grabManager == null) return;
 
@@ -95,7 +95,7 @@ namespace ABCsystem.Core
             SetBuffer(bufferCount);
         }
 
-         private void UpdateProperty(InspWindow inspWindow)
+         private void UpdateProperty(InspWindow inspWindow) 
         {
             if (inspWindow is null)
                 return;
@@ -105,7 +105,7 @@ namespace ABCsystem.Core
                 return;
         }
 
-        public void SetBuffer(int bufferCount)
+        public void SetBuffer(int bufferCount)  //이미지 버퍼 설정
         {
             if (_grabManager == null) return;
 
@@ -118,13 +118,13 @@ namespace ABCsystem.Core
             {
                 _grabManager.SetBuffer(
                     _imageSpace.GetInspectionBuffer(i),
-                    _imageSpace.GetnspectionBufferPtr(i),
+                    _imageSpace.GetInspectionBufferPtr(i),
                     _imageSpace.GetInspectionBufferHandle(i),
                     i);
             }
         }
 
-        public void TryInspection(InspWindow inspWindow = null)
+        public void TryInspection(InspWindow inspWindow = null) //검사 실행 함수
         {
             if (inspWindow is null)
             {
@@ -134,13 +134,13 @@ namespace ABCsystem.Core
                 inspWindow = _selectedInspWindow;
             }
 
-            UpdateDiagramEntity();
+            UpdateDiagramEntity();  //모델 트리와 이미지 뷰어 갱신
 
-            List<DrawInspectInfo> totalArea = new List<DrawInspectInfo>();
+            List<DrawInspectInfo> totalArea = new List<DrawInspectInfo>();  //검사 결과를 저장할 리스트
 
-            Rect windowArea = inspWindow.WindowArea;
+            Rect windowArea = inspWindow.WindowArea;    //검사 영역 설정
 
-            foreach (var inspAlgo in inspWindow.AlgorithmList)
+            foreach (var inspAlgo in inspWindow.AlgorithmList)  //각 알고리즘에 대해 검사 수행
             {
                 //검사 영역 초기화
                 inspAlgo.TeachRect = windowArea;
@@ -149,7 +149,7 @@ namespace ABCsystem.Core
                 InspectType inspType = inspAlgo.InspectType;
 
 
-                if (inspAlgo.DoInspect())
+                if (inspAlgo.DoInspect())   
                 {
                     List<DrawInspectInfo> resultArea = new List<DrawInspectInfo>();
                     int resultCnt = inspAlgo.GetResultRect(out resultArea);
@@ -160,7 +160,7 @@ namespace ABCsystem.Core
                 }
             }
 
-            if (totalArea.Count > 0)
+            if (totalArea.Count > 0)    //검사 결과가 있을 경우
             {
                 //찾은 위치를 이미지상에서 표시
                 var cameraForm = MainForm.GetDockForm<CameraForm>();
@@ -238,13 +238,13 @@ namespace ABCsystem.Core
         }
 
 
-        public void DelInspWindow(List<InspWindow> inspWindowList)
+        public void DelInspWindow(List<InspWindow> inspWindowList)  //InspWindow 여러개 삭제
         {
             _model.DelInspWindowList(inspWindowList);
             UpdateDiagramEntity();
         }
 
-        public void Grab(int bufferIndex)
+        public void Grab(int bufferIndex)   //이미지 촬영 함수
         {
             if (_grabManager == null)
                 return;
@@ -252,7 +252,7 @@ namespace ABCsystem.Core
             _grabManager.Grab(bufferIndex, true);
         }
 
-        private void DisplayGrabImage(int bufferIndex)
+        private void DisplayGrabImage(int bufferIndex)  //촬영된 이미지 표시 함수
         {
             var cameraForm = MainForm.GetDockForm<CameraForm>();
             if (cameraForm != null)
@@ -260,7 +260,7 @@ namespace ABCsystem.Core
                 cameraForm.UpdateDisplay();
             }
         }
-        private async void _multiGrab_TransferCompleted(object sender, object e)
+        private async void _multiGrab_TransferCompleted(object sender, object e)    
         {
             int bufferIndex = (int)e;
             SLogger.Write($"TransferCompleted {bufferIndex}");
@@ -278,16 +278,16 @@ namespace ABCsystem.Core
                 _grabManager.Grab(bufferIndex, true);  // 다음 촬영 시작
             }
         }
-        public Bitmap GetBitmap(int bufferIndex = -1)
+        public Bitmap GetBitmap(int bufferIndex = -1)   
         {
-            if (Global.Inst.InspStage.ImageSpace is null)
+            if (Global.Inst.InspStage.ImageSpace is null)   
                 return null;
 
             return Global.Inst.InspStage.ImageSpace.GetBitmap();
         }
         
         //#10_INSPWINDOW#14 변경된 모델 정보 갱신하여, ImageViewer와 모델트리에 반영
-        public void UpdateDiagramEntity()
+        public void UpdateDiagramEntity()   //모델 트리와 이미지 뷰어 갱신
         {
             CameraForm cameraForm = MainForm.GetDockForm<CameraForm>();
             if (cameraForm != null)

@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 
 namespace ABCsystem.Teach
 {
-    public class Model
+    public class Model  
     {
         //모델 정보 저장을 위해 추가한 프로퍼티
         public string ModelName { get; set; } = "";
@@ -26,7 +26,7 @@ namespace ABCsystem.Teach
         {
             InspWindowList = new List<InspWindow>();
         }
-        public InspWindow AddInspWindow(InspWindowType windowType)
+        public InspWindow AddInspWindow(InspWindowType windowType)  
         {
             InspWindow inspWindow = InspWindowFactory.Inst.Create(windowType);
             InspWindowList.Add(inspWindow);
@@ -34,7 +34,7 @@ namespace ABCsystem.Teach
             return inspWindow;
         }
 
-        public bool DelInspWindow(InspWindow inspWindow)
+        public bool DelInspWindow(InspWindow inspWindow)    //단일 InspWindow 삭제 메서드
         {
             if (InspWindowList.Contains(inspWindow))
             {
@@ -43,7 +43,7 @@ namespace ABCsystem.Teach
             }
             return false;
         }
-        public bool DelInspWindowList(List<InspWindow> inspWindowList)
+        public bool DelInspWindowList(List<InspWindow> inspWindowList)  //복수 InspWindow 삭제 메서드
         {
             int before = InspWindowList.Count;
             InspWindowList.RemoveAll(w => inspWindowList.Contains(w));

@@ -8,7 +8,7 @@ namespace ABCsystem.Core
 {
 
     //#10_INSPWINDOW#4 InspWindow 정의
-    public enum InspWindowType
+    public enum InspWindowType  //검사 창 타입
     {
         None = 0,
         Base

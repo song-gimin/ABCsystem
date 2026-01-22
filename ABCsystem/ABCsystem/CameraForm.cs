@@ -25,7 +25,7 @@ namespace ABCsystem
             imageViewer.DiagramEntityEvent += ImageViewer_DiagramEntityEvent;
         }
 
-        private void ImageViewer_DiagramEntityEvent(object sender, DiagramEntityEventArgs e)
+        private void ImageViewer_DiagramEntityEvent(object sender, DiagramEntityEventArgs e)    
         {
             SLogger.Write($"ImageViewer Action {e.ActionType.ToString()}");
             switch (e.ActionType)
@@ -56,15 +56,16 @@ namespace ABCsystem
             }
         }
 
-        public void LoadImage(string filePath)
+        public void LoadImage(string filePath)  //이미지 파일 로드
         {
             if (File.Exists(filePath) == false) return;
 
             Image bitmap = Image.FromFile(filePath);
             imageViewer.LoadBitmap((Bitmap)bitmap);
+            SLogger.Write($"Load Image : {filePath}");
         }
 
-        private void CameraForm_Resize(object sender, EventArgs e)
+        private void CameraForm_Resize(object sender, EventArgs e)  //폼 리사이즈 이벤트
         {
             int margin = 0;
             imageViewer.Width = this.Width - margin * 2;
@@ -73,7 +74,7 @@ namespace ABCsystem
             imageViewer.Location = new System.Drawing.Point(margin, margin);
         }
 
-        public void UpdateDisplay(Bitmap bitmap = null)
+        public void UpdateDisplay(Bitmap bitmap = null) //이미지 뷰어 갱신
         {
             if (bitmap == null)
             {
@@ -115,17 +116,17 @@ namespace ABCsystem
 
             imageViewer.SetDiagramEntityList(diagramEntityList);
         }
-        public void SelectDiagramEntity(InspWindow window)
+        public void SelectDiagramEntity(InspWindow window)  //ROI 선택
         {
             imageViewer.SelectDiagramEntity(window);
         }
 
-        public void AddRect(List<DrawInspectInfo> rectInfos)
+        public void AddRect(List<DrawInspectInfo> rectInfos)    //검사 결과 영역 추가
         {
             imageViewer.AddRect(rectInfos);
         }
 
-        public void AddRoi(InspWindowType inspWindowType)
+        public void AddRoi(InspWindowType inspWindowType)   //ImageViewCtrl에서 ROI 생성
         {
             imageViewer.NewRoi(inspWindowType);
         }

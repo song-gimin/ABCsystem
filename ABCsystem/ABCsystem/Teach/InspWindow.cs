@@ -9,7 +9,7 @@ using OpenCvSharp;
 
 namespace ABCsystem.Teach
 {
-    public class InspWindow
+    public class InspWindow //ROI 윈도우 정보를 담는 클래스
     {
         public InspWindowType InspWindowType { get; set; }
 
@@ -27,13 +27,13 @@ namespace ABCsystem.Teach
         {
         }
 
-        public InspWindow(InspWindowType windowType, string name)
+        public InspWindow(InspWindowType windowType, string name)   //생성자
         {
             InspWindowType = windowType;
             Name = name;
         }
 
-        public bool AddInspAlgorithm(InspectType inspType)
+        public bool AddInspAlgorithm(InspectType inspType)  //알고리즘 추가 메서드
         {
             InspAlgorithm inspAlgo = null;
 
@@ -45,7 +45,7 @@ namespace ABCsystem.Teach
             return true;
         }
 
-        public virtual bool OffsetMove(OpenCvSharp.Point offset)
+        public virtual bool OffsetMove(OpenCvSharp.Point offset)    //윈도우 이동 메서드
         {
             Rect windowRect = WindowArea;
             windowRect.X += offset.X;
