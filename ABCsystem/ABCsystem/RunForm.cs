@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ABCsystem.Core;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,6 +17,22 @@ namespace ABCsystem
         public RunForm()
         {
             InitializeComponent();
+        }
+
+        private void btnGrab_Click(object sender, EventArgs e)
+        {
+            Global.Inst.InspStage.Grab(0);
+        }
+
+        //LIVE#3 라이브 모드 버튼 추가
+        private void btnLive_Click(object sender, EventArgs e)
+        {
+            Global.Inst.InspStage.LiveMode = !Global.Inst.InspStage.LiveMode;
+
+            if (Global.Inst.InspStage.LiveMode)
+            {
+                Global.Inst.InspStage.Grab(0);
+            }
         }
     }
 }

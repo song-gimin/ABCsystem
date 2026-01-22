@@ -22,7 +22,7 @@ namespace ABCsystem.UIControl
         private RectangleF ImageRect = new RectangleF(0, 0, 0, 0);
 
         private float _curZoom = 1.0f;
-        
+
         private float _zoomFactor = 1.1f;
 
         private float MinZoom = 1.0f;
@@ -44,14 +44,17 @@ namespace ABCsystem.UIControl
             DoubleBuffered = true;
         }
 
+        public Bitmap GetCurBitmap()
+        {
+            return _bitmapImage;
+        }
+
         private void ResizeCanvas()
         {
-            if (Width <= 0 || Height <= 0 || _bitmapImage == null)
-                return;
+            if (Width <= 0 || Height <= 0 || _bitmapImage == null) return;
 
             Canvas = new Bitmap(Width, Height);
-            if (Canvas == null)
-                return;
+            if (Canvas == null) return;
 
             float virtualWidth = _bitmapImage.Width * _curZoom;
             float virtualHeight = _bitmapImage.Height * _curZoom;
@@ -90,7 +93,7 @@ namespace ABCsystem.UIControl
 
         private void FitImageToScreen()
         {
-            if (_bitmapImage is null) return;
+            if (_bitmapImage == null) return;
 
             RecalcZoomRatio();
 

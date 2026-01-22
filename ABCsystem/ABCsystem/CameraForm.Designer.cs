@@ -35,18 +35,21 @@
             // 
             this.imageViewer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.imageViewer.Location = new System.Drawing.Point(0, 0);
+            this.imageViewer.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.imageViewer.Name = "imageViewer";
-            this.imageViewer.Size = new System.Drawing.Size(800, 450);
+            this.imageViewer.Size = new System.Drawing.Size(1040, 600);
             this.imageViewer.TabIndex = 0;
             // 
             // CameraForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1040, 600);
             this.Controls.Add(this.imageViewer);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "CameraForm";
             this.Text = "CameraForm";
+            this.Resize += new System.EventHandler(this.CameraForm_Resize);
             this.ResumeLayout(false);
 
         }
