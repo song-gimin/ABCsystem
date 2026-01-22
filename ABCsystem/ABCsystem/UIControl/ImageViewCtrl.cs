@@ -28,7 +28,7 @@ namespace ABCsystem.UIControl
         DeleteList,
         UpdateImage
     }
-
+    
     public partial class ImageViewCtrl : UserControl
     {
         //ROI를 추가,수정,삭제 등으로 변경 시, 이벤트 발생
