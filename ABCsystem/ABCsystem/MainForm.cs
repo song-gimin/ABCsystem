@@ -59,6 +59,9 @@ namespace ABCsystem
 
             var logForm = new LogForm();
             logForm.Show(propForm.Pane, DockAlignment.Bottom, 0.5);
+
+            var modelTreeWindow = new ModelTreeForm();
+            modelTreeWindow.Show(runForm.Pane, DockAlignment.Right, 0.3);
         }
 
         public static T GetDockForm<T>() where T : DockContent

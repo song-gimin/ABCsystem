@@ -47,7 +47,7 @@ namespace ABCsystem.Core
 
             public int Stride { get; set; }
 
-            public Bitmap ToBitmap()
+            public Bitmap ToBitmap()    //Byte 배열을 Bitmap으로 변환
             {
                 if (_bitmap == null)
                 {
@@ -90,7 +90,7 @@ namespace ABCsystem.Core
                 return _tempBitmap;
             }
 
-            public Mat ToMat()
+            public Mat ToMat()  //Byte 배열을 Mat으로 변환
             {
                 MatType matType = PixelBpp == 8 ? MatType.CV_8UC1 : MatType.CV_8UC3;
                 Mat mat = Mat.FromPixelData(Height, Width, matType, ImageData);
@@ -127,7 +127,7 @@ namespace ABCsystem.Core
             #endregion
         }
 
-        public class ImagePtr
+        public class ImagePtr //이미지 포인터 정보를 담는 클래스
         {
             public IntPtr Ptr { get; set; }
             public long Length { get; set; }
